@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>IPF</title>
+<link rel="stylesheet" href="style.css">
+
+
+
+        
+
+   
+
+</head>
+<body>
+
+<h2 style="color:yellow;" >Basic math functions</h2>
+
+<h4 style="color:yellow;">First number</h4>
+<input id="textbox1" type="text">
+<h4 style="color:yellow;">Second number</h4>
+<input id="textbox2" type="text">
+
+<p id="result">results</p>
+
+ <hr style="border: 1px solid blue;" />
+
+<script> 
+// add subtract multiply divide and power 2 numbers.
+
+
+function add(){
+
+var num1 = Number(textbox1.value);
+var num2 = Number(textbox2.value);
+document.getElementById("result").innerHTML = num1 + num2;
+
+
+}
+
+function subtract(){
+
+var num1 = Number(textbox1.value);
+var num2 = Number(textbox2.value);
+document.getElementById("result").innerHTML = num1 - num2;
+
+
+}
+
+function mult(){
+
+var num1 = Number(textbox1.value);
+var num2 = Number(textbox2.value);
+document.getElementById("result").innerHTML = num1 * num2;
+
+
+}
+function divide(){
+
+var num1 = Number(textbox1.value);
+var num2 = Number(textbox2.value);
+document.getElementById("result").innerHTML = num1 / num2;
+
+
+}
+
+function power(){
+
+var num1 = Number(textbox1.value);
+var num2 = Number(textbox2.value);
+document.getElementById("result").innerHTML = num1 ** num2;
+
+
+}
+
+function myPower(){
+var num1 = Number(textbox1.value);
+var num2 =  Number(textbox2.value);
+var result = num1;
+	
+	for(var index=1; index < num2; index++)
+	result *= num1;
+document.getElementById("result").innerHTML = result;
+}
+
+</script> 
+
+
+<button class="button" type="button" onclick="add();">Add</button>
+<button class="button_pink" type="button" onclick="subtract();">Subtract</button>
+<button class="button" type="button" onclick="mult();">Multiply</button>
+<button class="button" type="button" onclick="divide();">Divide</button>
+<button class="button" type="button" onclick="myPower();">Power</button>
+
+
+
+
+
+</body>
+</html>
