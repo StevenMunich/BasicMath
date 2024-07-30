@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!--If you don't listen to God with your ears He will show you with your eyes-->
+    <!--Steven Munich-->
+    <!--ISSUE FIXED line 101 variable for function formatPercentage was "frequency1" instead of "Frequency1"-->
+    <meta charset="utf-8">
+    <title>Die Rolling Frequencies</title>
+    <style type="text/css">
+        body{background-color: purple
+
+        }
+        .totalPercentSum{
+            color: white
+        }
+        caption{color: white
+
+        }
+        img { margin-right: 10px;}
+        table {
+            width:200px;
+            border-collapse: collapse;
+            background-color: lightblue;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding: 4px;
+            margin-top: 20px;
+        }
+        th { 
+            text-align: left;
+            color: white;
+            background-color: darkblue;
+        }
+    </style>
+    <script>
+        var Frequency1 = 0;
+        var Frequency2 = 0;
+        var Frequency3 = 0;
+        var Frequency4 = 0;
+        var Frequency5 = 0;
+        var Frequency6 = 0;
+        var totalDice = 0;
+
+        //register button event handler
+        function start()
+        {
+            var button = document.getElementById("rollButton");
+            button.addEventListener("click", rollDice, false);
+        } // end function start
+
+        //roll the dice
+        function rollDice()
+        {
+            var face; //face rolled
+
+            for(var i=1; i <= 12; i++)
+            {
+                face = Math.floor( 1 + Math.random() * 6);
+                tallyRolls ( face ); //increment a frequency counter
+                setImage(i, face); //display appropriate die image
+                ++totalDice;  //increment total
+            } //end die rolling loop
+
+            updateFrequencyTable();
+        } //end function rollDice
+
+        //increment appropriate frequency counter
+        function tallyRolls( face )
+        {
+            switch( face )
+            {
+                case 1:
+                    ++Frequency1;
+                    break;
+                case 2:
+                    ++Frequency2;
+                    break;
+                case 3:
+                    ++Frequency3;
+                    break;
+                case 4:
+                    ++Frequency4;
+                    break;
+                case 5:
+                    ++Frequency5;
+                    break;
+                case 6:
+                    ++Frequency6;
+                    break;
+            } //end switch
+        } //end function tallyTolls
+
+        //set image source for die
+        function setImage (dieNumber, face)
+        {
+            var dieImg = document.getElementById( "die" + dieNumber);
+            dieImg.setAttribute("src", "die" + face + ".png");
+            dieImg.setAttribute("alt", "die with " + face + " spots(s)");
+        } //end function setImage
+
+        //update frequency table in the page
+        function updateFrequencyTable()
+        {
+            var tableDiv = document.getElementById( "frequencyTableDiv");
+
+            tableDiv.innerHTML = "<table>" +
+                "<caption>Die Rolling Frequencies</caption>" +
+                "<thead><th>Face</th><th>Frequency</th>" +
+                "<th>Percent</th></thead>" +
+                "<tbody><tr><td>1</td><td>" + Frequency1 + "</td><td>" +
+                formatPercent( Frequency1 / totalDice) + "</td></tr>" +
+                "<tr><td>2</td><td>" + Frequency2 + "</td><td>" +
+                formatPercent( Frequency2 / totalDice) + "</td></tr>" +
+                "<tr><td>3</td><td>" + Frequency3 + "</td><td>" +
+                formatPercent( Frequency3 / totalDice) + "</td></tr>" +
+                "<tr><td>4</td><td>" + Frequency4 + "</td><td>" +
+                formatPercent( Frequency4 / totalDice) + "</td></tr>" +
+                "<tr><td>5</td><td>" + Frequency5 + "</td><td>" +
+                formatPercent( Frequency5 / totalDice) + "</td></tr>" +
+                "<tr><td>6</td><td>" + Frequency6 + "</td><td>" +
+                formatPercent( Frequency6 / totalDice) + "</td></tr>" +
+                "</tbody></table>";
+
+                //show total
+                totalPercent();
+
+        } //end function updateFrequencyTable
+
+
+        //---------------ADDED
+        
+        function totalPercent()
+        {
+            var totalsum = 0;
+            var freq1 = ( Frequency1 / totalDice);
+            var freq2 = ( Frequency2 / totalDice);
+            var freq3 = ( Frequency3 / totalDice);
+            var freq4 = ( Frequency4 / totalDice);
+            var freq5 = ( Frequency5 / totalDice) ;
+            var freq6 = ( Frequency6 / totalDice);
+            
+            totalsum = freq1 + freq2 + freq3 + freq4 + freq5 + freq6;
+            document.getElementById("totalPercentSum").innerHTML = "<p style=' color: white'>Most Picked!: " + totalsum + "</p>";
+
+            
+
+             
+        }
+
+        //--------------END ADDED
+
+        //Format percentage
+        function formatPercent ( value )
+        {
+            value * 100;
+            return  value.toFixed(2); //2 decimal places
+        }
+        window.addEventListener("load", start, false);
+    </script>
+</head>
+<body>
+    <p><img id = "die1" src = "blank.png" alt = "die 1 image">
+       <img id = "die2" src = "blank.png" alt = "die 2 image">
+       <img id = "die3" src = "blank.png" alt = "die 3 image">
+       <img id = "die4" src = "blank.png" alt = "die 4 image">
+       <img id = "die5" src = "blank.png" alt = "die 5 image">
+       <img id = "die6" src = "blank.png" alt = "die 6 image">
+    </p>
+    <p><img id = "die7" src = "blank.png" alt = "die 7 image">
+        <img id = "die8" src = "blank.png" alt = "die 8 image">
+        <img id = "die9" src = "blank.png" alt = "die 9 image">
+        <img id = "die10" src = "blank.png" alt = "die 10 image">
+        <img id = "die11" src = "blank.png" alt = "die 11 image">
+        <img id = "die12" src = "blank.png" alt = "die 12 image">
+     </p>
+
+     <form action="#">
+        <input id="rollButton" type="button" value="Click to Roll 12 Dice">
+     </form>
+     <div id="frequencyTableDiv"></div>
+
+     <div id="totalPercentSum"></div>
+
+</body>
+</html>
